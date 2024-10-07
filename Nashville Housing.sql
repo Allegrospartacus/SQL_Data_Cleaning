@@ -16,7 +16,23 @@ from [Portfolio]..NashvilleHousing
 select top(5) * 
 from [Portfolio]..NashvilleHousing
  --------------------------------------------------------------------------------------------------------------------------
+--Ensure that all columns contain the expected data types
+	
+SELECT *
+FROM [Portfolio]..NashvilleHousing
+WHERE ISNUMERIC(SalePrice) = 0 OR SaleDate IS NULL;
 
+--------------------------------------------------------------------------------------------------------------------------	
+--Checking for Null Values
+SELECT 
+    COUNT(*) AS TotalRows,
+    SUM(CASE WHEN PropertyAddress IS NULL THEN 1 ELSE 0 END) AS MissingPropertyAddress,
+    SUM(CASE WHEN SalePrice IS NULL THEN 1 ELSE 0 END) AS MissingSalePrice
+FROM [Portfolio]..NashvilleHousing;
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
 -- Populate Property Address data 
 -- the houses with the same ParcelID have the same PropertyAddress
 
